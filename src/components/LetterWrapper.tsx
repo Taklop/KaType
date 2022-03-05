@@ -9,7 +9,9 @@ const LetterWrapper = ({ letter, yPos }: { letter: Letter; yPos: number }) => {
       style={{
         position: "absolute",
         transform: `translate(${innerWidth - letter.offset}px, 0px)`,
-        opacity: letter.color && letter.color === "success" ? 0.1 : 1,
+        opacity: letter.disabled ? 0.2 : 1,
+        color: getLetterColor(letter),
+        // ...(getLetterColor(letter) === 'red' && { animation: 'wiggle 0.5s 1' }), WIP
       }}
     >
       {letter.letter}
@@ -24,5 +26,16 @@ const LetterWrapper = ({ letter, yPos }: { letter: Letter; yPos: number }) => {
     </div>
   );
 };
+
+const getLetterColor = ({ color }: Letter): string => {
+  switch (color) {
+    case "success":
+      return '#72ff11'
+    case "failure":
+      return 'red'
+    default:
+      return 'currentColor'
+  }
+}
 
 export default LetterWrapper;

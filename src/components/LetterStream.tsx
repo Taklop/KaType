@@ -106,6 +106,9 @@ const LetterStream = ({
       letter.disabled = true;
       const newScore = score + 1 * speedMultiplier;
       setScore(Number(newScore.toFixed(2)));
+    } else if (letter && e.key !== letter.letter && !letter.disabled) {
+      letter.color = "failure";
+      letter.disabled = true;
     }
   };
 
